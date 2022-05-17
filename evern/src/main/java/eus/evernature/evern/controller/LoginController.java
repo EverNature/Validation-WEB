@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/login")
 public class LoginController {
   
+  //TODO: REDIRECT A LA PAGINA EN LA Q ESTABAS SI SE HA REGISTRADO
   @GetMapping
   public String login(HttpServletRequest request, HttpServletResponse response) {
     return "login";
