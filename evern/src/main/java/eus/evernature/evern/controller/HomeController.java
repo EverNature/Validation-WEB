@@ -1,11 +1,9 @@
 package eus.evernature.evern.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
   @GetMapping()
-  public String getHome(HttpServletRequest req, HttpServletResponse response) {
+  public String getHome(Model model) {
 
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String username = authentication.getName();
-
-    req.setAttribute("username", username);
+    // Prediction prediction = new Prediction(1, null, new Animal(1, "ANIMAL", true, null, null), null, 0.9f, "mensahe", "/images/aaaaaaaaa.jpg", true);
+    // Prediction prediction2 = new Prediction(1, null, new Animal(1, "ANIMAL", true, null, null), null, 0.9f, "mensahe", "/images/aaaaaaaaa.jpg", true);
+    // Prediction prediction3 = new Prediction(1, null, new Animal(1, "ANIMAL", true, null, null), null, 0.9f, "mensahe", "/images/aaaaaaaaa.jpg", true);
+    
+    // ArrayList<Prediction> predictions = new ArrayList<Prediction>();
+    // predictions.add(prediction);
+    // predictions.add(prediction2);
+    // predictions.add(prediction3);
+    model.addAttribute("predictions", new ArrayList<>());
 
     return "home";
   }

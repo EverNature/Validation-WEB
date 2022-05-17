@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link th:href=@{/styles/home.css} rel="stylesheet" />
+</head>
+
+<body>
+
+    <header>
+
+    </header>
+
+    <main>
+        <section class="header">
+            <h1 class="header_text">Validación de animales</h1>
+            <hr>
+        </section>
+        <section class="validation_items">
+            <th:block th:each="prediction : ${predictions}">
+                <div class="validation_item">
+                    <img class="image" th:src="@{${prediction.predictedImagePath}}" alt="">
+                    <div class="info">
+                        <h3 th:text="${prediction.detectedAnimal.name}"></h3>
+                        <div class="date">
+                            <span th:text="${prediction.confidence}"></span>
+                        </div>
+                    </div>
+                    <div class="validation_fill">
+                        <a th:href="@{'/validate/' + ${prediction.id}}" class="validation_btn">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </th:block>
+        </section>
+    </main>
+
+</body>
+
+</html>
