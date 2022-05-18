@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="animal_validation.css">
+    <link rel="stylesheet" th:href="@{/styles/validation.css}">
+    <script th:src="@{/js/validation.js}"></script>
 </head>
 <body>
 
@@ -18,7 +19,7 @@
             <h1 class="header_text" th:text="'Animal detectado ' + ${validationAnimal.detectedAnimal.name}"></h1>
             <hr>
         </section>
-        <section class="animal_section">
+        <form class="animal_section">
             <img class="image" th:src="${validationAnimal.predictedImagePath}" alt="">
             <div class="animal_info">
                 <div class="animal_general_info">
@@ -29,26 +30,27 @@
                 </div>
                 <div class="detection_selection">
                     <label for="">
-                        <input type="radio" name="selection"> Correct detection
+                        <input type="radio" name="selection" id="correct"> Correct detection
                     </label>
                     <label for="">
-                        <input type="radio" name="selection"> Wrong detection
+                        <input type="radio" name="selection" id="incorrect"> Wrong detection
                     </label>
                 </div>
                 <div class="animal_selection">
-                    <select name="animal" id="animal">
-                        <option value="UWU" autofocus>uwu</option>
-                        <option value="UWU 2">uwu 2</option>
+                    <select name="animal" id="animal" disabled>
+                        <option value="opcion 1" autofocus>opcion 1</option>
+                        <option value="opcion 2">opcion 2</option>
+                        <option value="other">OTHER</option>
                     </select>
-                    <input type="text" disabled>
+                    <input type="text" id="animal_text" disabled>
                 </div>
     
                 <div>
-                    <a href=""><button class="validate-button">VALIDAR ESPECIE</button></a>
-                    <a href=""><button class="cancelate-button">CANCELAR VALIDACION</button></a>
+                    <input type="submit" class="validate-button disabled" value="VALIDAR ESPECIE" id="submit">
+                    <a href="#"><button class="cancelate-button">CANCELAR VALIDACION</button></a>
                 </div>
             </div>
-        </section>
+        </form>
         
     </main>
     
