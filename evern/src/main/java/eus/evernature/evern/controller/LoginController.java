@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import eus.evernature.evern.models.Expert;
 import eus.evernature.evern.service.expert.ExpertService;
 
 @Controller

@@ -10,7 +10,6 @@ import eus.evernature.evern.models.Expert;
 import eus.evernature.evern.service.expert.ExpertService;
 
 
-
 @ControllerAdvice
 public class UserControllerAdvice {
 
