@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 import eus.evernature.evern.models.Prediction;
 import eus.evernature.evern.repository.PredictionRepository;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 @NoArgsConstructor
 @Transactional
-@Slf4j
 public class PredictionServiceImpl implements PredictionService {
 
     @Autowired

@@ -5,19 +5,11 @@ import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
-public class ValidationForm {
-    
+public class ValidationForm {    
     @NotEmpty
-    Integer id;
-
     boolean selection;
 
-    String correctedClass;
+    String animal;
 
-    String newClass;
-
-
-
-
-    
+    String newClass;    
 }
