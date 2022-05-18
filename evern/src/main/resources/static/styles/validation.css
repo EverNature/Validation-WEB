@@ -1,0 +1,133 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --light-white: rgb(245, 245, 245);
+    --medium-white: rgb(181, 181, 181);
+    --light-dark: rgb(41, 41, 41);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+h3{
+    margin: 0;
+}
+
+main{
+    width: 100%;
+}
+
+header{
+    background-color: black;
+    height: 75px;
+}
+
+.header{
+    padding: 1rem;
+}
+
+.header_text{
+    padding: 1rem;
+}
+
+.animal_section{
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.image{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.animal_info{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.animal_general_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.detection_selection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.animal_selection{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.validate-button {
+    margin-top: 1rem;
+    padding: 0.7rem;
+    width: 100%;
+    font-weight: 500;
+    border: 0;
+
+    color: white;
+    
+    background: linear-gradient(to right,  var(--light-dark) 50%, black 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
+}
+
+.validate-button:hover, .cancelate-button:hover {
+    background-position: left bottom;
+    cursor: pointer;
+}
+
+.cancelate-button{
+    margin-top: 1rem;
+    padding: 0.7rem;
+    width: 100%;
+    font-weight: 500;
+    border: 0;
+
+    color: white;
+    
+    background: linear-gradient(to right, rgb(222, 70, 70) 50%, rgb(214, 0, 0) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
+}
+
+.disabled{
+    opacity: 0.5;
+    background-position: left bottom;
+    cursor: not-allowed !important;
+}
+
+.enabled{
+    opacity: 1;
+    background-position: right bottom;
+    cursor: pointer !important;
+}
+
+@media (min-width: 750px){
+
+    .animal_section{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+
+        padding-inline: 8rem;
+        gap: 3rem;
+    }
+
+    .animal_info{
+        justify-content: space-around;
+    }
+}

@@ -45,7 +45,6 @@ public class ValidationController {
 
         if(pred == null)  {
             model.addAttribute("error", "Predicton not found");
-
             return "redirect:/home";
         }
         
