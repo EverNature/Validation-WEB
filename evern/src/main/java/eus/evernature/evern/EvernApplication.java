@@ -18,5 +18,4 @@ public class EvernApplication {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 }
