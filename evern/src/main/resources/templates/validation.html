@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/styles/validation.css}">
+    <script th:src="@{/js/validation.js}"></script>
+</head>
+<body>
+
+    <header>
+        
+    </header>
+    
+    <main>
+        <section class="header">
+            <h1 class="header_text" th:text="'Animal detectado ' + ${validationAnimal.detectedAnimal.name}"></h1>
+            <hr>
+        </section>
+        <form class="animal_section">
+            <img class="image" th:src="${validationAnimal.predictedImagePath}" alt="">
+            <div class="animal_info">
+                <div class="animal_general_info">
+                    <h3 th:text="${validationAnimal.detectedAnimal.name}">Great kiskadee</h3>
+                    <div class="date">
+                        <span>19/5/2021 22:45:00</span>
+                    </div>
+                </div>
+                <div class="detection_selection">
+                    <label for="">
+                        <input type="radio" name="selection" id="correct" value="true"> Correct detection
+                    </label>
+                    <label for="">
+                        <input type="radio" name="selection" id="incorrect" value="false"> Wrong detection
+                    </label>
+                </div>
+                <div class="animal_selection">
+                    <select name="animal" id="animal" disabled>
+                        <option value="opcion 1" autofocus>opcion 1</option>
+                        <option value="opcion 2">opcion 2</option>
+                        <option value="other">OTHER</option>
+                    </select>
+                    <input type="text" id="animal_text" name="newClass" disabled>
+                </div>
+    
+                <div>
+                    <input type="submit" class="validate-button disabled" value="VALIDAR ESPECIE" id="submit">
+                    <a href="#"><button class="cancelate-button">CANCELAR VALIDACION</button></a>
+                </div>
+            </div>
+        </form>
+        
+    </main>
+    
+</body>
+</html>
