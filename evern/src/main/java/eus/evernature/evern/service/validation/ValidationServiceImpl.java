@@ -50,12 +50,12 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     private void saveCorrectValidation(Prediction pred) {
-        pred.setCorrect(true);
+        pred.setIsCorrect(true);
         predictionService.savePrediction(pred);
     }
 
     private void saveIncorrectValidationWithExistentAnimal(Prediction pred, ValidationForm validationForm) {
-        pred.setCorrect(false);
+        pred.setIsCorrect(false);
         Animal correctedAnimal = animalService.getAnimal(validationForm.getAnimal());
 
         pred.setCorrectedAnimal(correctedAnimal);

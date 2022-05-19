@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import antlr.collections.List;
 import eus.evernature.evern.service.prediction.PredictionService;
 
 @Controller

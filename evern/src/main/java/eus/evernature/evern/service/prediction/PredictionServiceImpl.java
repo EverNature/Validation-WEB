@@ -1,5 +1,6 @@
 package eus.evernature.evern.service.prediction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -31,7 +32,8 @@ public class PredictionServiceImpl implements PredictionService {
 
     @Override
     public List<Prediction> getPredictions() {
-        return predictionRepository.findAll();
+        List<Prediction> predictions = predictionRepository.findAll();
+        return predictions == null ? new ArrayList<>() : predictions;
     }
 
     @Override

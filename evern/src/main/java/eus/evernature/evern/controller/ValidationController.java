@@ -48,7 +48,9 @@ public class ValidationController {
             return "redirect:/home";
         }
         
+        model.addAttribute("id", id);
         model.addAttribute("validationAnimal", pred);
+        model.addAttribute("species", animalService.getAnimals());
         
         return "validation";
     }
@@ -61,10 +63,10 @@ public class ValidationController {
 
         Expert expert = expertService.getExpert(username);
 
-        if(result.hasErrors()) {
-            model.addAttribute("error","Parameters not valid");
-            return "redirect:/";
-        }
+        // if(result.hasErrors()) {
+        //     model.addAttribute("error","Parameters not valid");
+        //     return "redirect:/";
+        // }
 
         validationService.saveValidation(validationForm, expert, id);
         return "redirect:/home";

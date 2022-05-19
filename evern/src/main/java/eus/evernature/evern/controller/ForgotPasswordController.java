@@ -1,15 +1,19 @@
 package eus.evernature.evern.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import eus.evernature.evern.models.Expert;
+import eus.evernature.evern.models.forms.UserRegistrationForm;
 import eus.evernature.evern.service.expert.ExpertService;
 import eus.evernature.evern.service.mail.MailService;
 import eus.evernature.evern.service.urlService.UrlService;
@@ -63,24 +67,42 @@ public class ForgotPasswordController {
         return "redirect:/login";
     }
 
-    @GetMapping("/reset")
-    public String resetPassword() {
+    @GetMapping("/reset_password")
+    public String resetPassword(@PathParam("token") String token, Model model) {
+
+        model.addAttribute("token", token);
+        
         return "change_password";
     }
 
-    @PostMapping("/recover")
-    public String getAccountRecoveryPage(String token, String email, Model model) {
-        Expert expert = expertService.getExpertByEmail(email);
+    @PostMapping("/reset_password")
+    public String getAccountRecoveryPage(@Validated @ModelAttribute UserRegistrationForm form, @PathParam("token") String token, Model model) {
+        Expert expert = expertService.getExpertByResetPasswordToken(token);
 
         if (expert == null) {
-            model.addAttribute("error", "El email introducido no se ha encontrado");
-            return "redirect:/";
+            model.addAttribute("error", "Chupame la polla hijo de la grandisima puta madre");
+            return "redirect:/login";
         }
 
-        expert.setResetPasswordToken(token);
-        expertService.saveUser(expert);
+        expertService.updatePassword(expert, form.getPassword());
 
-        return "recovery";
+        return "redirect:/login";
     }
+
+    // @PostMapping("/reset_password")
+    // public String getAccountRecoveryPage(String token, String email, Model model) {
+    //     Expert expert = expertService.getExpertByEmail(email);
+
+    //     if (expert == null) {
+    //         model.addAttribute("error", "El email introducido no se ha encontrado");
+    //         return "redirect:/";
+    //     }
+
+    //     expert.setResetPasswordToken(token);
+    //     expertService.saveUser(expert);
+
+    //     return "recovery";
+    // }
+    
 
 }

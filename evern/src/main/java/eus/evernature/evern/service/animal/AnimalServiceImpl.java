@@ -1,5 +1,6 @@
 package eus.evernature.evern.service.animal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +36,15 @@ public class AnimalServiceImpl implements AnimalService {
             return animal;
         }
         
-        log.info("Animal found in database: {}", animal);
+        log.info("Animal found in database: {}", animal.getName());
         
         return animal;
     }
 
     @Override
     public List<Animal> getAnimals() {
-        return animalRepository.findAll();
+        List<Animal> animals = animalRepository.findAll();
+        return animals == null ? new ArrayList<>() : animals;
     }
     
 }

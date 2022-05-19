@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.lang.Nullable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
@@ -42,7 +44,7 @@ public class Prediction {
     private Expert correctorExpert;
 
     @Column(name = "es_correcto")
-    private boolean isCorrect;
+    private Boolean isCorrect;
 
     @Column(name = "confianza")
     private Float confidence;

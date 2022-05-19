@@ -19,7 +19,7 @@
             <h1 class="header_text" th:text="'Animal detectado ' + ${validationAnimal.detectedAnimal.name}"></h1>
             <hr>
         </section>
-        <form class="animal_section">
+        <form class="animal_section" th:action="@{'/validate/' + ${id}}" method="post">
             <img class="image" th:src="${validationAnimal.predictedImagePath}" alt="">
             <div class="animal_info">
                 <div class="animal_general_info">
@@ -38,16 +38,15 @@
                 </div>
                 <div class="animal_selection">
                     <select name="animal" id="animal" disabled>
-                        <option value="opcion 1" autofocus>opcion 1</option>
-                        <option value="opcion 2">opcion 2</option>
+                        <option th:each="specie : ${species}" th:value="${specie.name}" th:text="${specie.name}"></option>
                         <option value="other">OTHER</option>
                     </select>
                     <input type="text" id="animal_text" name="newClass" disabled>
                 </div>
     
                 <div>
-                    <input type="submit" class="validate-button disabled" value="VALIDAR ESPECIE" id="submit">
-                    <a href="#"><button class="cancelate-button">CANCELAR VALIDACION</button></a>
+                    <input type="submit" class="validate-button disabled" value="VALIDAR ESPECIE" id="submit" disabled>
+                    <a th:href="@{/home}"><button class="cancelate-button">CANCELAR VALIDACION</button></a>
                 </div>
             </div>
         </form>
