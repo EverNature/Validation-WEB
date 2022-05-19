@@ -17,10 +17,6 @@ public class HomeController {
 
   @GetMapping()
   public String getHome(Model model) {
-
-    Prediction prediction = new Prediction(1, null, new Animal(1, "ANIMAL", true, null, null), null, 0.9f, "mensahe", "/images/aaaaaaaaa.jpg", true);
-    Prediction prediction2 = new Prediction(1, null, new Animal(1, "ANIMAL", true, null, null), null, 0.9f, "mensahe", "/images/aaaaaaaaa.jpg", true);
-    Prediction prediction3 = new Prediction(1, null, new Animal(1, "ANIMAL", true, null, null), null, 0.9f, "mensahe", "/images/aaaaaaaaa.jpg", true);
         
     model.addAttribute("predictions", predictionService.getPredictions());
 

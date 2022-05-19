@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/font/**",
           "/js/**",
           "/register",
-          "/login**"
+          "/login/**"
       };
   
       http.authorizeRequests()

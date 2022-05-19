@@ -11,17 +11,26 @@ body {
     width: 100%;
 }
 
-.main {
+.back-login{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    margin: 0 2rem 0 0;
+    height: 15%;
+}
+
+.div {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100%;
+    height: 70%;
 }
 
 .container {
-    width: 100%;
+    width: 90%;
     height: 50%;
     display: flex;
     flex-direction: column;
@@ -31,16 +40,17 @@ body {
 
 }
 
+.top-info{
+    color: var(--medium-white);
+    text-align: center;
+}
+
 .title {
     font-weight: 500;
 }
 
 .mid-login {
-    display: grid;
-    grid-template-rows: max-content 0.75fr max-content;
-    align-items: center;
-    gap: 1rem;
-    width: 50%;
+    width: 100%;
 }
 
 .split-container {
@@ -222,7 +232,18 @@ input[type=checkbox]:checked+label:after {
     line-height: 16px;
     background: black;
     border-color: black;
-    ;
+}
+
+.disabled{
+    opacity: 0.5;
+    background-position: left bottom;
+    cursor: not-allowed !important;
+}
+
+.enabled{
+    opacity: 1;
+    background-position: right bottom;
+    cursor: pointer !important;
 }
 
 @media (min-width: 750px) {
@@ -246,8 +267,7 @@ input[type=checkbox]:checked+label:after {
     }
 
     .container {
-        gap: 3rem;
-
+        width: 22%;
         animation: 0.5s ease-out 0s 1 slideInFromLeft;
     }
 
