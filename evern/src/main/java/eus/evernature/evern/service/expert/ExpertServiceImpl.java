@@ -3,6 +3,7 @@ package eus.evernature.evern.service.expert;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import eus.evernature.evern.exception.UserNotFoundException;
 import eus.evernature.evern.models.Expert;
 import eus.evernature.evern.models.Role;
 import eus.evernature.evern.repository.ExpertRepository;
@@ -39,15 +41,15 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Expert expert = expertRepository.findByUsername(username);
-        
-        if(expert == null) {
+
+        if (expert == null) {
             log.error("User not found in the database instance");
             throw new UsernameNotFoundException("User not found in database instance");
         } else {
             log.info("User found in database: {}", username);
         }
 
-        Collection<SimpleGrantedAuthority> authorities =  new ArrayList<>();
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         expert.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
 
         return new User(expert.getUsername(), expert.getPassword(), authorities);
@@ -78,5 +80,57 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     public List<Expert> getExperts() {
         log.info("Fetching all users from database");
         return expertRepository.findAll();
+    }
+
+    @Override
+    public Expert getExpertByEmail(String email) {
+
+        if (mailFormatCheck(email)) {
+            log.error("Invalid email. Not matching regex pattern. Email: {}", email);
+            return null;
+        }
+
+        Expert expert = expertRepository.findByEmail(email);
+
+        if(expert == null) log.error("Expert not found with email: {}", email);
+        
+        return expert;
+    }
+
+    public static boolean mailFormatCheck(String emailAddress) {
+        String regexPattern = "^(.+)@(\\S+)$";
+
+        return Pattern.compile(regexPattern)
+                .matcher(emailAddress)
+                .matches();
+    }
+
+    @Override
+    public Expert getExpertByResetPasswordToken(String token) {
+        return expertRepository.findByresetPasswordToken(token);
+    }
+
+    @Override
+    public void updatePassword(Expert expert, String newPassword) {
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        
+        expert.setPassword(encodedPassword);
+        expert.setResetPasswordToken(null);
+
+        expertRepository.save(expert);
+    }
+
+    @Override
+    public void updateResetPasswordToken(String token, String email) throws UserNotFoundException {
+
+        Expert expert = getExpertByEmail(email);
+
+        if(expert == null) {
+            log.error("Expert not found, revoking generated token");
+            throw new UserNotFoundException("User not found");
+        }
+
+        expert.setResetPasswordToken(token);
+        expertRepository.save(expert);
     }
 }
