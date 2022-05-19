@@ -17,7 +17,7 @@ public class HomeController {
 
   @GetMapping()
   public String getHome(Model model) {
-        
+
     model.addAttribute("predictions", predictionService.getPredictions());
 
     return "home";
