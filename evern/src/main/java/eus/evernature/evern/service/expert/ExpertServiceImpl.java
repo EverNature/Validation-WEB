@@ -111,7 +111,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     }
 
     public static boolean mailFormatCheck(String emailAddress) {
-        String regexPattern = "^(.+)@(\\S+)$";
+        String regexPattern = "(.+)@(\\S+)$";
 
         return Pattern.compile(regexPattern)
                 .matcher(emailAddress)
@@ -182,6 +182,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     @Override
     public void setAccountEnabled(Expert expert, boolean b) {
         expert.setAccountEnabled(b);
+        expert.setActivateAccountToken(null);
 
         expertRepository.save(expert);
     }
