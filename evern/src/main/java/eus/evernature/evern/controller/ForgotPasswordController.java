@@ -80,7 +80,7 @@ public class ForgotPasswordController {
         Expert expert = expertService.getExpertByResetPasswordToken(token);
 
         if (expert == null) {
-            model.addAttribute("error", "Chupame la polla hijo de la grandisima puta madre");
+            model.addAttribute("error", "Account not found");
             return "redirect:/login";
         }
 

@@ -10,4 +10,9 @@ public interface ExpertRepository extends JpaRepository<Expert, Integer> {
     Expert findByEmail(String email);
 
     Expert findByresetPasswordToken(String resetPasswordToken);
+
+    Expert findByactivateAccountToken(String activateAccountToken);
+
+    Boolean existsByUsername(String username);
+
 }

@@ -56,6 +56,12 @@ public class Expert {
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
 
+    @Column(name = "activate_account_token")
+    private String activateAccountToken;
+
+    @Column(name = "cuenta_activada")
+    private Boolean accountEnabled;
+
     @Column(name = "apellido")
     private String surname;
 
