@@ -43,9 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/images/**",
           "/font/**",
           "/js/**",
-          "/register",
+          "/register/**",
           "/login/**"
       };
+
+      http.headers().xssProtection().and().contentSecurityPolicy("script-src 'self'");
   
       http.authorizeRequests()
           .antMatchers(staticResources).permitAll()
