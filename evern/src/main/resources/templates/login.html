@@ -37,10 +37,10 @@
                                 <input title="password" type="password" class="custom-input" placeholder="Contraseña"
                                     name="password" id="passwordField" required>
                             </div>
-                                <div class="checkbox">
-                                    <input type="checkbox" id="customCheckbox" th:onclick="changeVisivility()" />
-                                    <label class="check_label" for="customCheckbox">Mostrar contraseña</label>
-                                </div>
+                            <div class="checkbox">
+                                <input type="checkbox" id="customCheckbox" th:onclick="changeVisivility()" />
+                                <label class="check_label" for="customCheckbox">Mostrar contraseña</label>
+                            </div>
                         </div>
                         <input type="submit" class="login-button" value="INICIAR SESION"></input>
                     </form>
@@ -67,7 +67,7 @@
                         </svg>
                         <span class="register-text">Continuar con Google</span>
                     </a>
-                    <a th:href="@{/login}" class="register-button">
+                    <a th:href="@{/register}" class="register-button">
                         <svg class="register-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="25px"
                             height="25px">
                             <path fill="#4caf50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z" />

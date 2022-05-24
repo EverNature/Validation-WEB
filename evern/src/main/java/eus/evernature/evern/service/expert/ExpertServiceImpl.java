@@ -18,8 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 import eus.evernature.evern.exception.UserNotFoundException;
 import eus.evernature.evern.models.Expert;
 import eus.evernature.evern.models.Role;
+import eus.evernature.evern.models.Specialization;
+import eus.evernature.evern.models.forms.ExpertCreationForm;
 import eus.evernature.evern.repository.ExpertRepository;
 import eus.evernature.evern.repository.RoleRepository;
+import eus.evernature.evern.repository.SpecializationRepository;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,11 +41,14 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private SpecializationRepository specializationRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Expert expert = expertRepository.findByUsername(username);
 
-        if (expert == null) {
+        if (expert == null || !expert.getAccountEnabled()) {
             log.error("User not found in the database instance");
             throw new UsernameNotFoundException("User not found in database instance");
         } else {
@@ -100,7 +106,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     }
 
     public static boolean mailFormatCheck(String emailAddress) {
-        String regexPattern = "^(.+)@(\\S+)$";
+        String regexPattern = "(.+)@(\\S+)$";
 
         return Pattern.compile(regexPattern)
                 .matcher(emailAddress)
@@ -110,6 +116,11 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     @Override
     public Expert getExpertByResetPasswordToken(String token) {
         return expertRepository.findByresetPasswordToken(token);
+    }
+
+    @Override
+    public Expert getExpertByActivateAccountToken(String token) {
+        return expertRepository.findByactivateAccountToken(token);
     }
 
     @Override
@@ -135,4 +146,45 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         expert.setResetPasswordToken(token);
         expertRepository.save(expert);
     }
+
+    @Override
+    public Expert mapExpertFormToExpert(ExpertCreationForm expertForm) {
+        Expert expert = new Expert();
+        
+        Specialization specialization = specializationRepository.findByname(expertForm.getSpecialization());
+
+        expert.setUsername(expertForm.getUsername());
+        expert.setEmail(expertForm.getEmail());
+        expert.setSurname(expertForm.getSurmane());
+        expert.setPassword(expertForm.getPassword());
+        expert.setSpecialization(specialization);
+
+        return expert;
+    }
+
+    @Override
+    public boolean checkExpertExistent(String username) {
+        return expertRepository.existsByUsername(username);
+    }
+
+    @Override
+    public void addActivationToken(String username, String token) {
+        Expert expert = expertRepository.findByUsername(username);
+
+        expert.setActivateAccountToken(token);
+        expert.setAccountEnabled(false);
+
+        expert = expertRepository.save(expert);        
+    }
+
+    @Override
+    public void setAccountEnabled(String username, boolean b) {
+        Expert expert = expertRepository.findByUsername(username);
+
+        expert.setAccountEnabled(b);
+        expert.setActivateAccountToken(null);
+
+        expertRepository.save(expert);
+    }
+
 }
