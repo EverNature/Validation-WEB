@@ -48,16 +48,11 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Expert expert = expertRepository.findByUsername(username);
 
-        if (expert == null) {
+        if (expert == null || !expert.getAccountEnabled()) {
             log.error("User not found in the database instance");
             throw new UsernameNotFoundException("User not found in database instance");
         } else {
             log.info("User found in database: {}", username);
-        }
-
-        if(!expert.getAccountEnabled()) {
-            log.error("Account not activated");
-            throw new UsernameNotFoundException("The account is not activated yet");
         }
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -161,7 +156,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         expert.setUsername(expertForm.getUsername());
         expert.setEmail(expertForm.getEmail());
         expert.setSurname(expertForm.getSurmane());
-        expert.setPassword(passwordEncoder.encode(expert.getPassword()));
+        expert.setPassword(expertForm.getPassword());
         expert.setSpecialization(specialization);
 
         return expert;
@@ -173,14 +168,19 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     }
 
     @Override
-    public void addActivationToken(Expert expert, String token) {
+    public void addActivationToken(String username, String token) {
+        Expert expert = expertRepository.findByUsername(username);
+
         expert.setActivateAccountToken(token);
+        expert.setAccountEnabled(false);
 
         expert = expertRepository.save(expert);        
     }
 
     @Override
-    public void setAccountEnabled(Expert expert, boolean b) {
+    public void setAccountEnabled(String username, boolean b) {
+        Expert expert = expertRepository.findByUsername(username);
+
         expert.setAccountEnabled(b);
         expert.setActivateAccountToken(null);
 

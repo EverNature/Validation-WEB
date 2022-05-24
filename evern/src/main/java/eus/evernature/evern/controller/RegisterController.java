@@ -46,18 +46,20 @@ public class RegisterController {
     public String registerSubmit(ExpertCreationForm form, Model model, HttpServletRequest request) {
         
         Expert expert = expertService.mapExpertFormToExpert(form);
-
+        
         if(expertService.checkExpertExistent(expert.getUsername())) {
             model.addAttribute("error", "El usuario que intentas crear ya existe");
             return "redirect:/register";
         }
+        
+        expert = expertService.saveUser(expert);
 
         String token = RandomString.make(45);
 
-        expertService.addActivationToken(expert, token);
+        expertService.addActivationToken(expert.getUsername(), token);
 
         // generate email
-        String resetPasswordLink = urlService.getSiteUrl(request) + "/token?token=" + token;
+        String resetPasswordLink = urlService.getSiteUrl(request) + "/activate?token=" + token;
 
         System.out.println(resetPasswordLink);
 
@@ -74,18 +76,17 @@ public class RegisterController {
         return "redirect:/login";
     }
 
-    @PostMapping("/token")
+    @GetMapping("/activate")
     public String submitToken(@PathParam("token") String token, Model model) {
 
-        
-        Expert expert = expertService.getExpertByResetPasswordToken(token);
+        Expert expert = expertService.getExpertByActivateAccountToken(token);
 
         if (expert == null) {
             model.addAttribute("error", "Account not found");
             return "redirect:/login";
         }
 
-        expertService.setAccountEnabled(expert, true);
+        expertService.setAccountEnabled(expert.getUsername(), true);
         
         return "redirect:/login";
     }

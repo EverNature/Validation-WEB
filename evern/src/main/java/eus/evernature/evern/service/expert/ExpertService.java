@@ -18,6 +18,6 @@ public interface ExpertService {
 
     Expert mapExpertFormToExpert(ExpertCreationForm expertForm);
     boolean checkExpertExistent(String username);
-    void addActivationToken(Expert expert, String token);
-    void setAccountEnabled(Expert expert, boolean b);
+    void addActivationToken(String username, String token);
+    void setAccountEnabled(String username, boolean b);
 }
