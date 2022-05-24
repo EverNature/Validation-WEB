@@ -1,0 +1,6 @@
+#animal{
+    width: 100%;
+    padding-block: 0.2rem;
+    border: none;   
+    border-bottom: 1px solid #ccc;
+}
