@@ -1,6 +1,12 @@
 pipeline {
   agent any
   stages {
+    stage('Compile') {
+      steps {
+        sh 'mvn -f evern/ clean compile'
+      }
+    }
+
     stage('Build Project') {
       steps {
         sh 'mvn -f evern/ clean install'
@@ -23,9 +29,11 @@ pipeline {
       }
     }
 
-    stage('Unit Test') {
+    stage('Integration Test') {
       steps {
-        sh 'mvn -f evern/ clean test'
+        withCredentials([string(credentialsId: 'jasypt-secret', variable: 'JASYPT')]) {
+          sh 'mvn -f evern/ clean test -Dspring.profiles.active=ci \ -Djasypt.encryptor.password=${JASYPT}'
+        }
       }
     }
   }

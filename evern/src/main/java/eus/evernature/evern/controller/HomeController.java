@@ -1,5 +1,7 @@
 package eus.evernature.evern.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,7 @@ public class HomeController {
   @GetMapping()
   public String getHome(Model model) {
         
-    model.addAttribute("predictions", predictionService.getPredictions());
+    model.addAttribute("predictions", new ArrayList<>());
 
     return "home";
   }
