@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "prediction")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
