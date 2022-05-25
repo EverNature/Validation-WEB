@@ -54,15 +54,15 @@ public class ForgotPasswordController {
 
         System.out.println(resetPasswordLink);
 
-        // send email
-        try {
-            mailService.sendEmail(email, resetPasswordLink, "Password reset",
-                    "<p>Usa el siguiente link para reiniciar tu contraseña: <a href='" + resetPasswordLink
-                            + "'>link de contraseña</a></p>");
-        } catch (Exception e) {
-            model.addAttribute("error", "Ha ocurrido un problema a la hora de enviar el email");
-            return "redirect:/";
-        }
+        // // send email
+        // try {
+        //     mailService.sendEmail(email, resetPasswordLink, "Password reset",
+        //             "<p>Usa el siguiente link para reiniciar tu contraseña: <a href='" + resetPasswordLink
+        //                     + "'>link de contraseña</a></p>");
+        // } catch (Exception e) {
+        //     model.addAttribute("error", "Ha ocurrido un problema a la hora de enviar el email");
+        //     return "redirect:/";
+        // }
 
         return "redirect:/login";
     }
@@ -88,21 +88,4 @@ public class ForgotPasswordController {
 
         return "redirect:/login";
     }
-
-    // @PostMapping("/reset_password")
-    // public String getAccountRecoveryPage(String token, String email, Model model) {
-    //     Expert expert = expertService.getExpertByEmail(email);
-
-    //     if (expert == null) {
-    //         model.addAttribute("error", "El email introducido no se ha encontrado");
-    //         return "redirect:/";
-    //     }
-
-    //     expert.setResetPasswordToken(token);
-    //     expertService.saveUser(expert);
-
-    //     return "recovery";
-    // }
-    
-
 }
