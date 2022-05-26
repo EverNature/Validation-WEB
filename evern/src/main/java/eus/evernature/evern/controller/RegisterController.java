@@ -4,9 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,13 +42,19 @@ public class RegisterController {
     public String register(Model model) {
 
         model.addAttribute("specializations", specializationService.getAllSpecializations());
+        model.addAttribute("expertCreationForm", new ExpertCreationForm());
 
         return "register";
     }
 
     @PostMapping
-    public String registerSubmit(ExpertCreationForm form, Model model, HttpServletRequest request) {
+    public String registerSubmit(@Validated @ModelAttribute ExpertCreationForm form, BindingResult result, Model model, HttpServletRequest request) {
         
+        if (result.hasErrors()) {
+            model.addAttribute("errors", result.getAllErrors());
+            return "redirect:/register";
+        }
+
         Expert expert = expertService.mapExpertFormToExpert(form);
         
         if(expertService.checkExpertExistent(expert.getUsername())) {

@@ -155,7 +155,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
 
         expert.setUsername(expertForm.getUsername());
         expert.setEmail(expertForm.getEmail());
-        expert.setSurname(expertForm.getSurmane());
+        expert.setSurname(expertForm.getSurname());
         expert.setPassword(expertForm.getPassword());
         expert.setSpecialization(specialization);
 
