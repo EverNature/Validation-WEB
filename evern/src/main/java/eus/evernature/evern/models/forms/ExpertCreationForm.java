@@ -1,14 +1,38 @@
 package eus.evernature.evern.models.forms;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import eus.evernature.evern.validation.ValidPassword;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Generated
 public class ExpertCreationForm {
+
+    @NotEmpty
     String username;
+
+    @NotEmpty
     String name;
-    String surmane;
+
+    @NotEmpty
+    String surname;
+
+    @NotEmpty
+    @Email
     String email;
+
+    @NotEmpty
     String specialization;
+
+    @NotEmpty
+    @ValidPassword
     String password;
 
     @Override
@@ -40,10 +64,10 @@ public class ExpertCreationForm {
                 return false;
         } else if (!specialization.equals(other.specialization))
             return false;
-        if (surmane == null) {
-            if (other.surmane != null)
+        if (surname == null) {
+            if (other.surname != null)
                 return false;
-        } else if (!surmane.equals(other.surmane))
+        } else if (!surname.equals(other.surname))
             return false;
         if (username == null) {
             if (other.username != null)
@@ -60,7 +84,7 @@ public class ExpertCreationForm {
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((specialization == null) ? 0 : specialization.hashCode());
-        result = prime * result + ((surmane == null) ? 0 : surmane.hashCode());
+        result = prime * result + ((surname == null) ? 0 : surname.hashCode());
         result = prime * result + ((username == null) ? 0 : username.hashCode());
         return result;
     }  

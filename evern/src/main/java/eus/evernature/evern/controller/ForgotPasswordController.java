@@ -6,6 +6,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -76,7 +77,13 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/reset_password")
-    public String getAccountRecoveryPage(@Validated @ModelAttribute UserRegistrationForm form, @PathParam("token") String token, Model model) {
+    public String getAccountRecoveryPage(@Validated @ModelAttribute UserRegistrationForm form, BindingResult result, @PathParam("token") String token, Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("errors", result.getAllErrors());
+            return "redirect:/login/account-recovery/reset_password?token=" + token;
+        }
+
         Expert expert = expertService.getExpertByResetPasswordToken(token);
 
         if (expert == null) {

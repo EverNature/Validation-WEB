@@ -18,7 +18,7 @@ class ExpertCreationFormTest {
         expertCreationForm.setEmail("a");
         expertCreationForm.setName("a");
         expertCreationForm.setPassword("a");
-        expertCreationForm.setSurmane("a");
+        expertCreationForm.setSurname("a");
         expertCreationForm.setName("a");
         expertCreationForm.setUsername("a");
         expertCreationForm.setSpecialization("a");
@@ -29,7 +29,7 @@ class ExpertCreationFormTest {
         expertCreationForm2.setEmail("a");
         expertCreationForm2.setName("a");
         expertCreationForm2.setPassword("a");
-        expertCreationForm2.setSurmane("a");
+        expertCreationForm2.setSurname("a");
         expertCreationForm2.setName("a");
         expertCreationForm2.setSpecialization("a");
         expertCreationForm2.setUsername("a");
@@ -43,7 +43,7 @@ class ExpertCreationFormTest {
         expertCreationForm.setEmail("a");
         expertCreationForm.setName("a");
         expertCreationForm.setPassword("a");
-        expertCreationForm.setSurmane("a");
+        expertCreationForm.setSurname("a");
         expertCreationForm.setName("a");
         expertCreationForm.setSpecialization("a");
         expertCreationForm.setUsername("a");
@@ -52,7 +52,7 @@ class ExpertCreationFormTest {
         expertCreationForm2.setEmail("a");
         expertCreationForm2.setName("a");
         expertCreationForm2.setPassword("a");
-        expertCreationForm2.setSurmane("a");
+        expertCreationForm2.setSurname("a");
         expertCreationForm2.setName("a");
         expertCreationForm2.setSpecialization("a");
         expertCreationForm2.setUsername("b");
@@ -84,7 +84,7 @@ class ExpertCreationFormTest {
         expertCreationForm.setEmail("a");
         expertCreationForm.setName("a");
         expertCreationForm.setPassword("a");
-        expertCreationForm.setSurmane("a");
+        expertCreationForm.setSurname("a");
         expertCreationForm.setName("a");
         expertCreationForm.setUsername("a");
         expertCreationForm.setSpecialization("a");
@@ -98,7 +98,7 @@ class ExpertCreationFormTest {
         expertCreationForm.setEmail("a");
         expertCreationForm.setName("a");
         expertCreationForm.setPassword("a");
-        expertCreationForm.setSurmane("a");
+        expertCreationForm.setSurname("a");
         expertCreationForm.setName("a");
         expertCreationForm.setUsername("a");
         expertCreationForm.setSpecialization("a");
