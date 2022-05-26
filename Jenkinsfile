@@ -7,12 +7,6 @@ pipeline {
       }
     }
 
-    stage('Build Project') {
-      steps {
-        sh 'mvn -f evern/ clean install'
-      }
-    }
-
     stage('Static Analysis') {
       steps {
         withSonarQubeEnv('SonarEvern') {
