@@ -62,7 +62,6 @@
                             <div>
                                 <select name="specialization" id="animal" th:field="*{specialization}">
                                     <option name="specialization" th:each="specialization : ${specializations}" th:value="${specialization.name}" th:text="${specialization.name}" ></option>
-                                    <option value="other">OTHER</option>
                                 </select>
                             </div>
                         </div>

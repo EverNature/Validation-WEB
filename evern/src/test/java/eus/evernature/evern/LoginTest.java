@@ -47,7 +47,7 @@ class LoginTest {
     MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 
     String username = "testUser";
-    String password = "userTest";
+    String password = "12345678aA@";
 
     params.add("username", username);
     params.add("password", password);
