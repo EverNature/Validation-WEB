@@ -39,7 +39,7 @@ class ExpertServiceTest {
         expertCreationForm.setEmail("a");
         expertCreationForm.setName("a");
         expertCreationForm.setPassword("a");
-            expertCreationForm.setSurmane("a");
+        expertCreationForm.setSurname("a");
         expertCreationForm.setName("a");
 
         Expert expert = expertService.mapExpertFormToExpert(expertCreationForm);
