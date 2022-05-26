@@ -2,7 +2,6 @@ package eus.evernature.evern.service.expert;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,12 +82,6 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     }
 
     @Override
-    public List<Expert> getExperts() {
-        log.info("Fetching all users from database");
-        return expertRepository.findAll();
-    }
-
-    @Override
     public Expert getExpertByEmail(String email) {
 
         // if (mailFormatCheck(email)) {
@@ -153,6 +146,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         
         Specialization specialization = specializationRepository.findByname(expertForm.getSpecialization());
 
+        expert.setName(expertForm.getName());
         expert.setUsername(expertForm.getUsername());
         expert.setEmail(expertForm.getEmail());
         expert.setSurname(expertForm.getSurmane());
