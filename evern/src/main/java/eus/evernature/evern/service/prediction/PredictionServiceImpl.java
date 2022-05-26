@@ -6,6 +6,9 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import eus.evernature.evern.models.Prediction;
@@ -42,4 +45,12 @@ public class PredictionServiceImpl implements PredictionService {
         pred = prediction;
         return predictionRepository.save(pred);
     }
+
+    @Override
+    public Page<Prediction> getPredictionsSorted(Integer page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        
+        Page<Prediction> predictions = predictionRepository.findAllSorted(pageable);
+        return predictions;
+   }
 }
