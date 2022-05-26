@@ -26,7 +26,7 @@ pipeline {
     stage('Integration Test') {
       steps {
         withCredentials([string(credentialsId: 'jasypt-secret', variable: 'JASYPT')]) {
-          sh 'mvn -f evern/ clean test -Dspring.profiles.active=ci \ -Djasypt.encryptor.password=${JASYPT}'
+          sh 'mvn -f evern/ clean test -Djasypt.encryptor.password=${JASYPT}'
         }
       }
     }
