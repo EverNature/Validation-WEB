@@ -18,7 +18,7 @@ pipeline {
     stage('Quality Gate') {
       steps {
         timeout(time: 2, unit: 'MINUTES') {
-          waitForQualityGate abortPipeline: true, credentialsId: 'evern_validation_web'
+          waitForQualityGate abortPipeline: true
         }
       }
     }

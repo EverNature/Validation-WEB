@@ -43,8 +43,7 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public List<Animal> getAnimals() {
-        List<Animal> animals = animalRepository.findAll();
-        return (animals == null || animals.isEmpty()) ? new ArrayList<>() : animals;
+        return animalRepository.findAll();
     }
     
 }
