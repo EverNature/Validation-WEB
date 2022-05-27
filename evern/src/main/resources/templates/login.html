@@ -8,7 +8,7 @@
     <title>Login | EverNature</title>
     <link th:href=@{/styles/login.css} rel="stylesheet" />
     <link rel="icon" th:href="@{/images/favicon.ico}">
-    <script th:src="@{/js/password.js}"></script>
+    <script th:src="@{/js/password.js}" src="/js/password.js"></script>
 </head>
 
 <body>
@@ -38,7 +38,7 @@
                                     name="password" id="passwordField" required>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" id="customCheckbox" th:onclick="changeVisivility()" />
+                                <input type="checkbox" id="customCheckbox" />
                                 <label class="check_label" for="customCheckbox">Mostrar contraseña</label>
                             </div>
                         </div>

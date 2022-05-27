@@ -6,11 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @SpringBootApplication
 @EnableEncryptableProperties
-public class EvernApplication {
+public class EvernApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EvernApplication.class, args);
@@ -20,5 +22,11 @@ public class EvernApplication {
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/img/**").addResourceLocations("file:uploads/")
+				.setCachePeriod(0);
 	}
 }
