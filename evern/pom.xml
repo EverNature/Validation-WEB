@@ -8,7 +8,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>eus.evernature</groupId>
-	<artifactId>evern</artifactId>
+	<artifactId>EvernWeb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>evern</name>
 	<description>Web server for img validation</description>
