@@ -1,20 +1,14 @@
-function changeVisivility() {
-    var x = document.getElementById("passwordField");
-    if (x.type === "password") {
-        x.type = "text";
-    } else {
-        x.type = "password";
-    }
-}
+window.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded and parsed");
+    document.getElementById("customCheckbox").addEventListener("click", changeVisivility, false)
+})
 
-function changeBothVisivility() {
+function changeVisivility() {
+    console.log("changeVisivility");
     var x = document.getElementById("passwordField");
-    var y = document.getElementById("passwordConfirmField");
     if (x.type === "password") {
         x.type = "text";
-        y.type = "text";
     } else {
         x.type = "password";
-        y.type = "password";
     }
 }
