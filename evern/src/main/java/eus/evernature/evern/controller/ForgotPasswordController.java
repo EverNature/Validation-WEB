@@ -26,7 +26,7 @@ import net.bytebuddy.utility.RandomString;
 @Slf4j
 public class ForgotPasswordController {
 
-    final static String REDIRECT_LOGIN = "redirect:/login";
+    static final String REDIRECT_LOGIN = "redirect:/login";
 
     @Autowired
     ExpertService expertService;

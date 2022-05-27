@@ -19,17 +19,19 @@ import eus.evernature.evern.service.expert.ExpertService;
 import eus.evernature.evern.service.mail.MailService;
 import eus.evernature.evern.service.specialization.SpecializationService;
 import eus.evernature.evern.service.urlService.UrlService;
+import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
 
 @Controller
 @RequestMapping("/register")
+@Slf4j
 public class RegisterController {
 
-    final static String ERROR = "error";
-    final static String ERROR_LIST = "errors";
+    static final String ERROR = "error";
+    static final String ERROR_LIST = "errors";
 
-    final static String REDIRECT_LOGIN = "redirect:/login";
-    final static String REDIRECT_REGISTER = "redirect:/register";
+    static final String REDIRECT_LOGIN = "redirect:/login";
+    static final String REDIRECT_REGISTER = "redirect:/register";
 
 
     @Autowired
@@ -77,7 +79,7 @@ public class RegisterController {
         // generate email
         String resetPasswordLink = urlService.getSiteUrl(request) + "/activate?token=" + token;
 
-        System.out.println(resetPasswordLink);
+        log.info("Activation link: " + resetPasswordLink);
 
         // send email
         try {
@@ -99,10 +101,11 @@ public class RegisterController {
 
         if (expert == null) {
             model.addAttribute(ERROR, "Account not found");
-            return REDIRECT_LOGIN;
+        }
+        else{
+            expertService.setAccountEnabled(expert.getUsername(), true);
         }
 
-        expertService.setAccountEnabled(expert.getUsername(), true);
         
         return REDIRECT_LOGIN;
     }

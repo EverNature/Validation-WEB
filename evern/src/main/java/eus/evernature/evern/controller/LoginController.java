@@ -30,6 +30,6 @@ public class LoginController {
     private boolean checkLogedIn() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        return (authentication == null || authentication instanceof AnonymousAuthenticationToken) ? false : true;
+        return !(authentication == null || authentication instanceof AnonymousAuthenticationToken);
     }
 }
