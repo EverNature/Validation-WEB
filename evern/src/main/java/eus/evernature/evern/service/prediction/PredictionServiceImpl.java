@@ -41,9 +41,9 @@ public class PredictionServiceImpl implements PredictionService {
 
     @Override
     public Prediction updatePrediction(Integer predictionId, Prediction prediction) {
-        Prediction pred = predictionRepository.getById(predictionId);
-        pred = prediction;
-        return predictionRepository.save(pred);
+        prediction.setId(predictionId);
+
+        return predictionRepository.existsById(predictionId) ? predictionRepository.save(prediction) : null;
     }
 
     @Override
