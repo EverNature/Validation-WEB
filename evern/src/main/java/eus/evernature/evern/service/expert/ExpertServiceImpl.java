@@ -98,14 +98,6 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         return expert;
     }
 
-    public static boolean mailFormatCheck(String emailAddress) {
-        String regexPattern = "(.+)@(\\S+)$";
-
-        return Pattern.compile(regexPattern)
-                .matcher(emailAddress)
-                .matches();
-    }
-
     @Override
     public Expert getExpertByResetPasswordToken(String token) {
         return expertRepository.findByresetPasswordToken(token);
