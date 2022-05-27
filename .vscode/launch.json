@@ -7,7 +7,7 @@
             "request": "launch",
             "mainClass": "eus.evernature.evern.EvernApplication",
             "projectName": "evern",
-            "vmArgs": "-Djasypt.encryptor.password=password"
+            "vmArgs": "-Djasypt.encryptor.password=EverNatureSecretKey"
         }
     ]
 }
