@@ -10,7 +10,7 @@ pipeline {
     stage('Static Analysis') {
       steps {
         withSonarQubeEnv('SonarWebEvern') {
-          sh 'mvn sonar:sonar -f evern/ clean verify sonar:sonar -D sonar.projectKey=evern_validation_web -D maven.test.skip=true'
+          sh 'mvn sonar:sonar -f evern/ clean verify sonar:sonar -D sonar.projectKey=sonar_web -D maven.test.skip=true'
         }
       }
     }
