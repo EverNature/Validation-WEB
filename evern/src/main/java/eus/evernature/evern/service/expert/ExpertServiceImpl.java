@@ -2,7 +2,6 @@ package eus.evernature.evern.service.expert;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -91,7 +90,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
 
         Expert expert = expertRepository.findByEmail(email);
 
-        System.out.println("El email es: " + email);
+        log.info("El email es: {}", email);
 
         if(expert == null) log.error("Expert not found with email: {}", email);
         
@@ -160,7 +159,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         expert.setActivateAccountToken(token);
         expert.setAccountEnabled(false);
 
-        expert = expertRepository.save(expert);        
+        expertRepository.save(expert);        
     }
 
     @Override

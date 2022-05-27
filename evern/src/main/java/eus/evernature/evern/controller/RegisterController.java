@@ -25,6 +25,13 @@ import net.bytebuddy.utility.RandomString;
 @RequestMapping("/register")
 public class RegisterController {
 
+    final static String ERROR = "error";
+    final static String ERROR_LIST = "errors";
+
+    final static String REDIRECT_LOGIN = "redirect:/login";
+    final static String REDIRECT_REGISTER = "redirect:/register";
+
+
     @Autowired
     ExpertService expertService;
 
@@ -50,15 +57,15 @@ public class RegisterController {
     public String registerSubmit(@Validated @ModelAttribute ExpertCreationForm form, BindingResult result, Model model, HttpServletRequest request) {
         
         if (result.hasErrors()) {
-            model.addAttribute("errors", result.getAllErrors());
-            return "redirect:/register";
+            model.addAttribute(ERROR_LIST, result.getAllErrors());
+            return REDIRECT_REGISTER;
         }
 
         Expert expert = expertService.mapExpertFormToExpert(form);
         
         if(expertService.checkExpertExistent(expert.getUsername())) {
-            model.addAttribute("error", "El usuario que intentas crear ya existe");
-            return "redirect:/register";
+            model.addAttribute(ERROR, "El usuario que intentas crear ya existe");
+            return REDIRECT_REGISTER;
         }
         
         expert = expertService.saveUser(expert);
@@ -78,11 +85,11 @@ public class RegisterController {
                     "<p>Usa el siguiente link para activar la cuenta: <a href='" + resetPasswordLink
                             + "'>Link de activacion</a></p>");
         } catch (Exception e) {
-            model.addAttribute("error", "Ha ocurrido un problema a la hora de enviar el email");
+            model.addAttribute(ERROR, "Ha ocurrido un problema a la hora de enviar el email");
             return "redirect:/";
         }
 
-        return "redirect:/login";
+        return REDIRECT_LOGIN;
     }
 
     @GetMapping("/activate")
@@ -91,13 +98,13 @@ public class RegisterController {
         Expert expert = expertService.getExpertByActivateAccountToken(token);
 
         if (expert == null) {
-            model.addAttribute("error", "Account not found");
-            return "redirect:/login";
+            model.addAttribute(ERROR, "Account not found");
+            return REDIRECT_LOGIN;
         }
 
         expertService.setAccountEnabled(expert.getUsername(), true);
         
-        return "redirect:/login";
+        return REDIRECT_LOGIN;
     }
 
 }

@@ -50,7 +50,6 @@ public class PredictionServiceImpl implements PredictionService {
     public Page<Prediction> getPredictionsSorted(Integer page) {
         Pageable pageable = PageRequest.of(page, 10);
         
-        Page<Prediction> predictions = predictionRepository.findAllSorted(pageable);
-        return predictions;
+        return predictionRepository.findAllSorted(pageable);
    }
 }

@@ -18,11 +18,15 @@ import eus.evernature.evern.models.forms.UserRegistrationForm;
 import eus.evernature.evern.service.expert.ExpertService;
 import eus.evernature.evern.service.mail.MailService;
 import eus.evernature.evern.service.urlService.UrlService;
+import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
 
 @Controller
 @RequestMapping("/login/account-recovery")
+@Slf4j
 public class ForgotPasswordController {
+
+    final static String REDIRECT_LOGIN = "redirect:/login";
 
     @Autowired
     ExpertService expertService;
@@ -53,7 +57,7 @@ public class ForgotPasswordController {
         // generate email
         String resetPasswordLink = urlService.getSiteUrl(request) + "/reset_password?token=" + token;
 
-        System.out.println(resetPasswordLink);
+        log.info("Reset password link: " + resetPasswordLink);
 
         // // send email
         // try {
@@ -65,7 +69,7 @@ public class ForgotPasswordController {
         //     return "redirect:/";
         // }
 
-        return "redirect:/login";
+        return REDIRECT_LOGIN;
     }
 
     @GetMapping("/reset_password")
@@ -88,11 +92,11 @@ public class ForgotPasswordController {
 
         if (expert == null) {
             model.addAttribute("error", "Account not found");
-            return "redirect:/login";
+            return REDIRECT_LOGIN;
         }
 
         expertService.updatePassword(expert, form.getPassword());
 
-        return "redirect:/login";
+        return REDIRECT_LOGIN;
     }
 }

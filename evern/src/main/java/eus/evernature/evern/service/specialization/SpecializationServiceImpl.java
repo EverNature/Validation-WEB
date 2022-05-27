@@ -28,7 +28,7 @@ public class SpecializationServiceImpl implements SpecializationService{
         List<Specialization> specializations = specializationRepository.findAll();
 
         
-        if(specializations == null || specializations.size() <= 0) {
+        if(specializations == null || specializations.isEmpty()) {
             log.error("Specializations not found in database");
             return new ArrayList<>();
         } else {
