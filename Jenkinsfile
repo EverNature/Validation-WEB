@@ -11,7 +11,7 @@ pipeline {
       steps {
         withSonarQubeEnv('EvernSonar') {
           withCredentials([string(credentialsId: 'SonarAdminToken', variable: 'SONAR_TOKEN')]) {
-            sh 'mvn sonar:sonar -f evern/ clean verify -D sonar.projectKey=ValidationWeb -D sonar.login=SONAR_TOKEN -D maven.test.skip=true'
+            sh 'mvn sonar:sonar -f evern/ clean verify -D sonar.projectKey=ValidationWeb -D sonar.host.url=https://sonarqube.evern.eus -D sonar.java.coveragePlugin=jacoco -D sonar.login=SONAR_TOKEN -D maven.test.skip=true'
           }
         }
       }
