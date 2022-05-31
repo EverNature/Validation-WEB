@@ -10,7 +10,7 @@ pipeline {
     stage('Static Analysis') {
       steps {
         withSonarQubeEnv('EvernSonar') {
-          sh 'mvn sonar:sonar -f evern/ clean verify -D sonar.projectKey=ValidationWeb -D sonar.host.url=https://sonarqube.evern.eus -D sonar.login=14057a128f38d6c666a58201ececcb265faf0b35'
+          sh 'mvn sonar:sonar -f evern/ clean verify -D sonar.projectKey=ValidationWeb -D sonar.host.url=https://sonarqube.evern.eus -D sonar.login=14057a128f38d6c666a58201ececcb265faf0b35 -D maven.test.skip=true'
         }
       }
     }
