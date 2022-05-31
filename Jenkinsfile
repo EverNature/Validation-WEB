@@ -17,18 +17,10 @@ pipeline {
       }
     }
 
-    stage('QualityGate') {
-      steps {
-          timeout(time: 5, unit: 'MINUTES') {
-            waitForQualityGate true
-          }
-      }
-    }
-
     stage('Integration Test') {
       steps {
         withCredentials([string(credentialsId: 'jasypt-secret', variable: 'JASYPT')]) {
-          sh 'mvn -f evern/ clean test -Djasypt.encryptor.password=${JASYPT}'
+          sh 'mvn -f evern/ clean test -D jasypt.encryptor.password=${JASYPT}'
         }
       }
     }
