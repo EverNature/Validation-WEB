@@ -16,11 +16,11 @@ pipeline {
     }
 
     stage('Quality Gate') {
-      // steps {
+      steps {
       //   timeout(time: 10, unit: 'MINUTES') {
       //     waitForQualityGate true
       //   }
-      // }
+      }
     }
 
     stage('Integration Test') {
