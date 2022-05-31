@@ -9,8 +9,8 @@ pipeline {
 
     stage('Static Analysis') {
       steps {
-        withSonarQubeEnv('SonarWebEvern') {
-          sh 'mvn sonar:sonar -f evern/ clean verify -D sonar.login=sonar_web -D maven.test.skip=true'
+        withSonarQubeEnv('EvernSonar') {
+          sh 'mvn sonar:sonar -f evern/ clean verify -D sonar.projectKey=SonarAdminToken -D maven.test.skip=true'
         }
       }
     }
@@ -18,7 +18,7 @@ pipeline {
     stage('Quality Gate') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
-          waitForQualityGate abortPipeline: true, credentialsId: 'sonar_web' 
+          waitForQualityGate true
         }
       }
     }
