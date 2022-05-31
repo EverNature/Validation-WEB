@@ -15,14 +15,6 @@ pipeline {
       }
     }
 
-    stage('Quality Gate') {
-      steps {
-      //   timeout(time: 10, unit: 'MINUTES') {
-      //     waitForQualityGate true
-      //   }
-      }
-    }
-
     stage('Integration Test') {
       steps {
         withCredentials([string(credentialsId: 'jasypt-secret', variable: 'JASYPT')]) {
