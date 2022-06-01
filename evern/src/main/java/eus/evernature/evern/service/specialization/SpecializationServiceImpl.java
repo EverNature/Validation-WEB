@@ -27,13 +27,12 @@ public class SpecializationServiceImpl implements SpecializationService{
     public List<Specialization> getAllSpecializations() {
         List<Specialization> specializations = specializationRepository.findAll();
 
-        if(specializations.equals(null)) {
-            log.error("Specializations not found in database");
-            return new ArrayList<>();
+        if(specializations.isEmpty()) {
+            log.info("There are no specializations in the database");
         } else {
             log.info("Getting all specializations from database");
-            return specializations;
         }
+        return specializations;
     }
     
 }

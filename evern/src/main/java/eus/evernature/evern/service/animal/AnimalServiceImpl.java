@@ -44,7 +44,7 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public List<Animal> getAnimals() {
         List<Animal> animals = animalRepository.findAll();
-        return animals == null ? new ArrayList<>() : animals;
+        return animals;
     }
     
 }
