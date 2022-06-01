@@ -99,7 +99,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     }
 
     public static boolean mailFormatCheck(String emailAddress) {
-        String regexPattern = "(.+)@(\\S+)$";
+        String regexPattern = "^(.+)@(.+)$";
 
         return Pattern.compile(regexPattern)
                 .matcher(emailAddress)
