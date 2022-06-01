@@ -7,6 +7,14 @@ pipeline {
       }
     }
 
+    stage('Integration Test') {
+      steps {
+        withCredentials([string(credentialsId: 'jasypt-secret', variable: 'JASYPT')]) {
+          sh 'mvn -f evern/ clean test -D jasypt.encryptor.password=${JASYPT}'
+        }
+      }
+    }
+
     stage('Static Analysis') {
       steps {
         withSonarQubeEnv('EvernSonar') {
@@ -23,14 +31,6 @@ pipeline {
                 waitForQualityGate abortPipeline: true, credentialsId: 'SonarAdminToken'
             }
         }
-    }
-
-    stage('Integration Test') {
-      steps {
-        withCredentials([string(credentialsId: 'jasypt-secret', variable: 'JASYPT')]) {
-          sh 'mvn -f evern/ clean test -D jasypt.encryptor.password=${JASYPT}'
-        }
-      }
     }
   }
   
