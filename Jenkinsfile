@@ -60,7 +60,7 @@ pipeline {
         branch 'main'
       }
       steps {
-        sh 'docker run -d -p 8080:8080 --name decklearn evernature/evern'
+        sh 'docker run -d -p 8181:8080 --name decklearn evernature/evern'
       }
     }
 
