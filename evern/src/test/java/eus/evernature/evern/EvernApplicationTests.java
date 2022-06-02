@@ -29,15 +29,15 @@ class EvernApplicationTests {
 		assertNotNull(mockMvc);
 	}
 
-	// @Test
-	// @Transactional
-	// @WithMockUser(username = "testUser", roles = "Admin")
-	// void shouldReturnHomePage() throws Exception {
-	// 	String url = "/home";
+	@Test
+	@Transactional
+	@WithMockUser(username = "testUser", roles = "Admin")
+	void shouldReturnHomePage() throws Exception {
+		String url = "/home";
 
-	// 	mockMvc.perform(MockMvcRequestBuilders.get(url))
-	// 			.andExpect(MockMvcResultMatchers.status().isOk());
-	// }
+		mockMvc.perform(MockMvcRequestBuilders.get(url))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
 
 	@Test
 	@WithAnonymousUser
