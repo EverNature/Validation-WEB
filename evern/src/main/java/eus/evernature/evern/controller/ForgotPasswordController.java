@@ -37,11 +37,23 @@ public class ForgotPasswordController {
     @Autowired
     MailService mailService;
 
+    
+    /** 
+     * Esta función se encarga de mostrar el formulario de recuperación de contraseña
+     * @return String   El nombre de la vista
+     */
     @GetMapping
     public String getAccountRecoveryPage() {
         return "recovery";
     }
 
+    
+    /** 
+     * Esta función se encarga de enviar un correo de recuperación de contraseña
+     * @param request
+     * @param model
+     * @return String   El nombre de la vista
+     */
     @PostMapping
     public String generatePasswordToken(HttpServletRequest request, Model model) {
         String email = request.getParameter("email");
@@ -72,6 +84,13 @@ public class ForgotPasswordController {
         return REDIRECT_LOGIN;
     }
 
+    
+    /** 
+     * Esta función obtiene el token de recuperación de contraseña y te muestra el formulario para cambiar la contraseña
+     * @param token  El token de recuperación de contraseña
+     * @param model
+     * @return String   El nombre de la vista
+     */
     @GetMapping("/reset_password")
     public String resetPassword(@PathParam("token") String token, Model model) {
 
@@ -80,6 +99,15 @@ public class ForgotPasswordController {
         return "change_password";
     }
 
+    
+    /** 
+     * Esta función se encarga de cambiar la contraseña siempre y cuando las contraseñas cumplan con los criterios de seguridad
+     * @param form El formulario con la contraseña nueva
+     * @param result El resultado de la validación teniendo en cuenta los criterios de seguridad
+     * @param token El token de recuperación de contraseña
+     * @param model
+     * @return String   El nombre de la vista
+     */
     @PostMapping("/reset_password")
     public String getAccountRecoveryPage(@Validated @ModelAttribute UserRegistrationForm form, BindingResult result, @PathParam("token") String token, Model model) {
 

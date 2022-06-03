@@ -16,6 +16,11 @@ public class UserControllerAdvice {
   @Autowired
   ExpertService userService;
 
+  
+  /** 
+   * Esta función se encarga de añadir el usuario logueado al modelo cada vez que se carga una vista
+   * @return Expert  El usuario logueado
+   */
   @ModelAttribute("user")
   public Expert addUserToModel() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();

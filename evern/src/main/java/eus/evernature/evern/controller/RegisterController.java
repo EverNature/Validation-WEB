@@ -46,6 +46,12 @@ public class RegisterController {
     @Autowired
     UrlService urlService;
 
+    
+    /** 
+     * Esta función se encarga de mostrar el formulario de registro
+     * @param model
+     * @return String   El nombre de la vista
+     */
     @GetMapping
     public String register(Model model) {
 
@@ -55,6 +61,15 @@ public class RegisterController {
         return "register";
     }
 
+    
+    /** 
+     * Esta función se encarga de generar un token para la activacion de la cuenta y se encarga de enviar un correo de activación
+     * @param form
+     * @param result
+     * @param model
+     * @param request
+     * @return String   El nombre de la vista
+     */
     @PostMapping
     public String registerSubmit(@Validated @ModelAttribute ExpertCreationForm form, BindingResult result, Model model, HttpServletRequest request) {
         
@@ -94,6 +109,13 @@ public class RegisterController {
         return REDIRECT_LOGIN;
     }
 
+    
+    /** 
+     * Esta función se encarga de activar la cuenta del usuario recibiendo el token enviado por correo
+     * @param token
+     * @param model
+     * @return String   El nombre de la vista
+     */
     @GetMapping("/activate")
     public String submitToken(@PathParam("token") String token, Model model) {
 

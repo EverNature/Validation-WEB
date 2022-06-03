@@ -18,6 +18,12 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
+    
+    /** 
+     * Esta función guarda un rol en la base de datos
+     * @param role
+     * @return Role
+     */
     @Override
     public Role saveRole(Role role) {
         log.info("Saving role {} to the database", role.getName());

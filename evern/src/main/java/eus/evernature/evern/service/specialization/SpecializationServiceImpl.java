@@ -22,6 +22,11 @@ public class SpecializationServiceImpl implements SpecializationService{
     SpecializationRepository specializationRepository;
 
 
+    
+    /** 
+     * Esta función obtiene todas las especializaciones de la base de datos
+     * @return List<Specialization>
+     */
     @Override
     public List<Specialization> getAllSpecializations() {
         List<Specialization> specializations = specializationRepository.findAll();
