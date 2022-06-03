@@ -58,7 +58,7 @@ public class PredictionServiceImpl implements PredictionService {
 
     
     /** 
-     * 
+     * Esta función actualiza una predicción de la base de datos
      * @param predictionId
      * @param prediction
      * @return Prediction
@@ -72,6 +72,7 @@ public class PredictionServiceImpl implements PredictionService {
 
     
     /** 
+     * Esta función devuelve todas las predicciones divididas en páginas
      * @param page
      * @return Page<Prediction>
      */
