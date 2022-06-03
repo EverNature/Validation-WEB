@@ -9,14 +9,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @SpringBootApplication
 @EnableEncryptableProperties
+@Slf4j
 public class EvernApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EvernApplication.class, args);
-		System.out.println(org.hibernate.Version.getVersionString());
+		log.info(org.hibernate.Version.getVersionString());
 	}
 
 	@Bean
