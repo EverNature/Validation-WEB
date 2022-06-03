@@ -17,6 +17,12 @@ public class LoginController {
     @Autowired
     ExpertService expertService;
 
+    
+    /** 
+     * Esta función se encarga de mostrar la página de inicio de sesion
+     * @param model
+     * @return String   El nombre de la vista
+     */
     @GetMapping("/login")
     public String login(Model model) {
         if (checkLogedIn()) {
@@ -27,6 +33,11 @@ public class LoginController {
         return "login";
     }
 
+    
+    /** 
+     * Esta función se encarga de validar si el usuario esta logueado o no
+     * @return boolean  True si el usuario esta logueado, false en caso contrario
+     */
     private boolean checkLogedIn() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {

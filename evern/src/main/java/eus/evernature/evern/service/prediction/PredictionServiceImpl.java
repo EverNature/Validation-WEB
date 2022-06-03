@@ -23,22 +23,46 @@ public class PredictionServiceImpl implements PredictionService {
     @Autowired
     PredictionRepository predictionRepository;
 
+    
+    /** 
+     * Esta función guarda una predicción en la base de datos
+     * @param prediction
+     * @return Prediction
+     */
     @Override
     public Prediction savePrediction(Prediction prediction) {
         return predictionRepository.save(prediction);
     }
 
+    
+    /** 
+     * Esta función carga una predicción de la base de datos
+     * @param predictionId
+     * @return Prediction
+     */
     @Override
     public Prediction getPrediction(Integer predictionId) {
         return predictionRepository.getById(predictionId);
     }
 
+    
+    /** 
+     * Esta función carga todas las predicciones de la base de datos
+     * @return List<Prediction>
+     */
     @Override
     public List<Prediction> getPredictions() {
         List<Prediction> predictions = predictionRepository.findAll();
         return predictions == null ? new ArrayList<>() : predictions;
     }
 
+    
+    /** 
+     * 
+     * @param predictionId
+     * @param prediction
+     * @return Prediction
+     */
     @Override
     public Prediction updatePrediction(Integer predictionId, Prediction prediction) {
         Prediction pred = predictionRepository.getById(predictionId);
@@ -46,6 +70,11 @@ public class PredictionServiceImpl implements PredictionService {
         return predictionRepository.save(pred);
     }
 
+    
+    /** 
+     * @param page
+     * @return Page<Prediction>
+     */
     @Override
     public Page<Prediction> getPredictionsSorted(Integer page) {
         Pageable pageable = PageRequest.of(page, 10);

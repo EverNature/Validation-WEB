@@ -14,6 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LogoutController {
 
 
+  
+  /** 
+   * Esta función se encarga de cerrar la sesión del usuario
+   * @param request
+   * @param response
+     * @return String   El nombre de la vista
+   */
   @GetMapping(value = "/logout")
   public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();

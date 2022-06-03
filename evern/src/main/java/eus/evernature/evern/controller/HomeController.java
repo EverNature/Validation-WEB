@@ -18,8 +18,12 @@ public class HomeController {
   @Autowired
   PredictionService predictionService;
   
-
-
+  /** 
+   * Esta función se encarga de mostrar las paginas en la que se muestran las predicciones
+   * @param page El número de página
+   * @param model
+     * @return String   El nombre de la vista
+   */
   @GetMapping({ "", "/{page}"})
   public String getHome(@PathVariable(required = false) Integer page, Model model) {
 

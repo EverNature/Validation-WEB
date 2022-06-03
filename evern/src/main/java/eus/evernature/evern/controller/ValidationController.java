@@ -38,6 +38,13 @@ public class ValidationController {
     ValidationService validationService;
 
     
+    
+    /** 
+     * Esta función se encarga de mostrar una de las predicciones realizadas por la IA
+     * @param model
+     * @param id
+     * @return String   El nombre de la vista
+     */
     @GetMapping("/{id}")
     public String validatePage(Model model, @PathVariable("id") Integer id) {
 
@@ -55,6 +62,15 @@ public class ValidationController {
         return "validation";
     }
 
+    
+    /** 
+     * Esta función se encarga de validar una predicción y enviarla a la base de datos
+     * @param model
+     * @param id
+     * @param validationForm
+     * @param result
+     * @return String   El nombre de la vista
+     */
     @PostMapping("/{id}")
     public String validate(Model model, @PathVariable("id") Integer id, @Validated @ModelAttribute ValidationForm validationForm, BindingResult result) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

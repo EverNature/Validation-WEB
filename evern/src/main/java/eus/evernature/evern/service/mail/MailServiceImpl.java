@@ -23,6 +23,15 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender mailSender;
 
+    
+    /** 
+     * Esta función envia un correo de recuperación de contraseña a un usuario
+     * @param email
+     * @param resetPasswordLink
+     * @param subject
+     * @param text
+     * @throws RuntimeException
+     */
     @Override
     public void sendEmail(String email, String resetPasswordLink, String subject, String text) throws RuntimeException {
         MimeMessage message = mailSender.createMimeMessage();

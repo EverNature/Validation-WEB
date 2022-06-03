@@ -2,7 +2,6 @@ package eus.evernature.evern.service.expert;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -43,6 +42,13 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
     @Autowired
     private SpecializationRepository specializationRepository;
 
+    
+    /** 
+     * Esta función carga un experto de la base de datos, siempre y cuando exista y la cuanta este activada
+     * @param username
+     * @return UserDetails
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Expert expert = expertRepository.findByUsername(username);
@@ -60,6 +66,12 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         return new User(expert.getUsername(), expert.getPassword(), authorities);
     }
 
+    
+    /** 
+     * Esta función crea un nuevo experto en la base de datos
+     * @param expert
+     * @return Expert
+     */
     @Override
     public Expert saveUser(Expert expert) {
         log.info("Saving new user to the database");
@@ -67,6 +79,12 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         return expertRepository.save(expert);
     }
 
+    
+    /** 
+     * Esta función actualiza un experto en la base de datos, añadiendole un nuevo rol
+     * @param username
+     * @param roleName
+     */
     @Override
     public void addRoleToUser(String username, String roleName) {
         log.info("Adding role {} to user {}", roleName, username);
@@ -75,12 +93,24 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         expert.getRoles().add(role);
     }
 
+    
+    /** 
+     * Esta función obtiene un experto de la base de datos, a partir de su username
+     * @param username
+     * @return Expert
+     */
     @Override
     public Expert getExpert(String username) {
         log.info("Getting user {} from database", username);
         return expertRepository.findByUsername(username);
     }
 
+    
+    /** 
+     * Esta función obtiene un experto de la base de datos, a partir de su email
+     * @param email
+     * @return Expert
+     */
     @Override
     public Expert getExpertByEmail(String email) {
     
@@ -93,16 +123,34 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         return expert;
     }
 
+    
+    /** 
+     * Esta función obtiene un experto de la base de datos, a partir del token de reset de contraseña
+     * @param token
+     * @return Expert
+     */
     @Override
     public Expert getExpertByResetPasswordToken(String token) {
         return expertRepository.findByresetPasswordToken(token);
     }
 
+    
+    /** 
+     * Esta función obtiene un experto de la base de datos, a partir del token de activación de cuenta
+     * @param token
+     * @return Expert
+     */
     @Override
     public Expert getExpertByActivateAccountToken(String token) {
         return expertRepository.findByactivateAccountToken(token);
     }
 
+    
+    /** 
+     * Esta función actualiza la contraseña de un experto en la base de datos
+     * @param expert
+     * @param newPassword
+     */
     @Override
     public void updatePassword(Expert expert, String newPassword) {
         String encodedPassword = passwordEncoder.encode(newPassword);
@@ -113,6 +161,13 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         expertRepository.save(expert);
     }
 
+    
+    /** 
+     * Esta función actualiza el token de reset de contraseña de un experto en la base de datos
+     * @param token
+     * @param email
+     * @throws UserNotFoundException
+     */
     @Override
     public void updateResetPasswordToken(String token, String email) throws UserNotFoundException {
 
@@ -127,6 +182,12 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         expertRepository.save(expert);
     }
 
+    
+    /** 
+     * Esta función mapea un formulario de creación de experto a un experto 
+     * @param expertForm
+     * @return Expert
+     */
     @Override
     public Expert mapExpertFormToExpert(ExpertCreationForm expertForm) {
         Expert expert = new Expert();
@@ -143,11 +204,23 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         return expert;
     }
 
+    
+    /** 
+     * Esta función mira si un experto existe en la base de datos
+     * @param username
+     * @return boolean
+     */
     @Override
     public boolean checkExpertExistent(String username) {
         return expertRepository.existsByUsername(username);
     }
 
+    
+    /** 
+     * Esta función añade a un usuario su respectivo token de activación de cuenta
+     * @param username
+     * @param token
+     */
     @Override
     public void addActivationToken(String username, String token) {
         Expert expert = expertRepository.findByUsername(username);
@@ -158,6 +231,12 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
         expert = expertRepository.save(expert);        
     }
 
+    
+    /** 
+     * Esta función habilita una cuenta de un experto
+     * @param username
+     * @param b
+     */
     @Override
     public void setAccountEnabled(String username, boolean b) {
         Expert expert = expertRepository.findByUsername(username);
