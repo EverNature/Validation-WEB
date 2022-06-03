@@ -19,11 +19,20 @@ import eus.evernature.evern.service.expert.ExpertService;
 import eus.evernature.evern.service.mail.MailService;
 import eus.evernature.evern.service.specialization.SpecializationService;
 import eus.evernature.evern.service.urlService.UrlService;
+import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
 
 @Controller
 @RequestMapping("/register")
+@Slf4j
 public class RegisterController {
+
+    static final String ERROR = "error";
+    static final String ERROR_LIST = "errors";
+
+    static final String REDIRECT_LOGIN = "redirect:/login";
+    static final String REDIRECT_REGISTER = "redirect:/register";
+
 
     @Autowired
     ExpertService expertService;
@@ -50,15 +59,15 @@ public class RegisterController {
     public String registerSubmit(@Validated @ModelAttribute ExpertCreationForm form, BindingResult result, Model model, HttpServletRequest request) {
         
         if (result.hasErrors()) {
-            model.addAttribute("errors", result.getAllErrors());
-            return "redirect:/register";
+            model.addAttribute(ERROR_LIST, result.getAllErrors());
+            return REDIRECT_REGISTER;
         }
 
         Expert expert = expertService.mapExpertFormToExpert(form);
         
         if(expertService.checkExpertExistent(expert.getUsername())) {
-            model.addAttribute("error", "El usuario que intentas crear ya existe");
-            return "redirect:/register";
+            model.addAttribute(ERROR, "El usuario que intentas crear ya existe");
+            return REDIRECT_REGISTER;
         }
         
         expert = expertService.saveUser(expert);
@@ -70,7 +79,7 @@ public class RegisterController {
         // generate email
         String resetPasswordLink = urlService.getSiteUrl(request) + "/activate?token=" + token;
 
-        System.out.println(resetPasswordLink);
+        log.info("Activation link: " + resetPasswordLink);
 
         // send email
         try {
@@ -78,11 +87,11 @@ public class RegisterController {
                     "<p>Usa el siguiente link para activar la cuenta: <a href='" + resetPasswordLink
                             + "'>Link de activacion</a></p>");
         } catch (Exception e) {
-            model.addAttribute("error", "Ha ocurrido un problema a la hora de enviar el email");
+            model.addAttribute(ERROR, "Ha ocurrido un problema a la hora de enviar el email");
             return "redirect:/";
         }
 
-        return "redirect:/login";
+        return REDIRECT_LOGIN;
     }
 
     @GetMapping("/activate")
@@ -91,13 +100,14 @@ public class RegisterController {
         Expert expert = expertService.getExpertByActivateAccountToken(token);
 
         if (expert == null) {
-            model.addAttribute("error", "Account not found");
-            return "redirect:/login";
+            model.addAttribute(ERROR, "Account not found");
+        }
+        else{
+            expertService.setAccountEnabled(expert.getUsername(), true);
         }
 
-        expertService.setAccountEnabled(expert.getUsername(), true);
         
-        return "redirect:/login";
+        return REDIRECT_LOGIN;
     }
 
 }
