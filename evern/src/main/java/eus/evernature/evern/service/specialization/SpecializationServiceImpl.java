@@ -1,6 +1,5 @@
 package eus.evernature.evern.service.specialization;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -27,14 +26,12 @@ public class SpecializationServiceImpl implements SpecializationService{
     public List<Specialization> getAllSpecializations() {
         List<Specialization> specializations = specializationRepository.findAll();
 
-        
         if(specializations.isEmpty()) {
-            log.error("Specializations not found in database");
-            return new ArrayList<>();
+            log.info("There are no specializations in the database");
         } else {
             log.info("Getting all specializations from database");
-            return specializations;
         }
+        return specializations;
     }
     
 }

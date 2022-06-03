@@ -27,7 +27,7 @@ class ValidationTest {
     // @Transactional
     // @WithMockUser(username = "testUser", roles = "Admin")
     // void GetFirstValidationIsOK() throws Exception {
-    //     String url = "/validate/1";
+    //     String url = "/validate/67";
 
     //     mockMvc.perform(MockMvcRequestBuilders.get(url))
     //             .andExpect(MockMvcResultMatchers.status().isOk());

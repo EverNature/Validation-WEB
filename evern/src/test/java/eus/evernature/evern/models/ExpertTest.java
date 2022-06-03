@@ -50,11 +50,11 @@ class ExpertTest {
         assertEquals(expert.hashCode(), expert.hashCode());
     }
 
-    @Test
-    @Transactional
-    void expertTostringIsOk() throws Exception {
-        Expert expert = expertService.getExpert("testUser");
+    // @Test
+    // @Transactional
+    // void expertTostringIsOk() throws Exception {
+    //     Expert expert = expertService.getExpert("testUser");
 
-        assertEquals(expert.toString(), expert.toString());
-    }
+    //     assertEquals(expert.toString(), expert.toString());
+    // }
 }

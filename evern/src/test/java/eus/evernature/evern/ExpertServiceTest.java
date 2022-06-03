@@ -62,6 +62,8 @@ class ExpertServiceTest {
         String username = "testUser";
 
         expertService.addRoleToUser(username, role);
+
+        assertTrue(true);
     }
 
     @Test

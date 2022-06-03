@@ -82,12 +82,7 @@ public class ExpertServiceImpl implements ExpertService, UserDetailsService {
 
     @Override
     public Expert getExpertByEmail(String email) {
-
-        // if (mailFormatCheck(email)) {
-        //     log.error("Invalid email. Not matching regex pattern. Email: {}", email);
-        //     return null;
-        // }
-
+    
         Expert expert = expertRepository.findByEmail(email);
 
         log.info("El email es: {}", email);
