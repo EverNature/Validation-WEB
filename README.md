@@ -38,7 +38,6 @@ established objectives and working hypotheses.
 
 ## Used technologies
 * [![image](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)](https://spring.io/projects/spring-boot)
-* [Thymeleaf](https://www.thymeleaf.org/)
 * [![image](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)](https://hibernate.org/)
 
 ## 
