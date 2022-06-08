@@ -98,9 +98,10 @@ public class RegisterController {
 
         // send email
         try {
-            mailService.sendEmail(expert.getEmail(), resetPasswordLink, "Activar cuenta",
-                    "<p>Usa el siguiente link para activar la cuenta: <a href='" + resetPasswordLink
-                            + "'>Link de activacion</a></p>");
+            // String emailText = mailService.loadMail("activateAccount.html", resetPasswordLink);
+            String emailText = "<!DOCTYPE html><html lang=\"en\"><head> <meta charset=\"UTF-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>Recupera tu contraseña</title> <style> * { font-family: Candara; box-sizing: border-box; --light-white: rgb(245, 245, 245); --medium-white: rgb(181, 181, 181); --light-dark: rgb(41, 41, 41); } body { margin: 0; background-color: whitesmoke; } main { display: flex; flex-direction: column; align-items: center; height: 100vh; width: 100%; } header { background-color: #ec6d64; height: 15%; width: 100%; } h1 { margin: 0; text-align: center; } p { text-align: center; } .main-container { position: absolute; top: 7%; width: 65%; padding: 2rem; height: fit-content; display: flex; flex-direction: column; align-items: center; background-color: white; } .register-button { background-color: white; border: 1px solid black; padding: 1rem 1rem; font-size: 0.9rem; display: flex; flex-direction: row; align-items: center; gap: 2rem; color: black; text-decoration: none; } .register-button:hover { background-color: var(--light-white); transition: 0.2s; } .register-icon { width: 10%; } .register-text { font-weight: 600; } </style></head><body> <main> <header></header> <div class=\"main-container\"> <h1>Recupera tu contraseña</h1> <p>Para poder recuperar tu contraseña tienes que usar el proximo link.</p> <p>Si no has sido tu ignora este mensaje.</p> <a href=\"REPLACEME\" class=\"register-button\"> <span class=\"register-text\">Recuperar contraseña</span> </a> </div> </main></body></html>";
+            emailText = emailText.replace("REPLACEME", resetPasswordLink);
+            mailService.sendEmail(expert.getEmail(), emailText, "Recuperación de contraseña");       
         } catch (Exception e) {
             model.addAttribute(ERROR, "Ha ocurrido un problema a la hora de enviar el email");
             return "redirect:/";

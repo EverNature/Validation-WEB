@@ -70,9 +70,7 @@ class ExpertServiceTest {
     void getInvalidUserThrowsAnException() {
         String randomUsername = RandomString.make(45);
 
-        Expert expert = null;
-
-        expert = expertService.getExpert(randomUsername);
+         expertService.getExpert(randomUsername);
 
         assertTrue(true);
     }
