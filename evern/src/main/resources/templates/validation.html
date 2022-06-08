@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <link rel="stylesheet" th:href="@{/styles/validation.css}">
     <script th:src="@{/js/validation.js}"></script>
     <script th:src="@{/js/menu.js}"></script>
@@ -33,7 +34,7 @@
             <hr>
         </section>
         <form class="animal_section" th:action="@{'/validate/' + ${id}}" method="post">
-            <img class="image" th:src="${validationAnimal.predictedImagePath}" alt="">
+            <img class="image" th:src="@{/img/aaaaaaaaa.jpg}" alt="">
             <div class="animal_info">
                 <div class="animal_general_info">
                     <h3 th:text="${validationAnimal.detectedAnimal.name}">Great kiskadee</h3>
