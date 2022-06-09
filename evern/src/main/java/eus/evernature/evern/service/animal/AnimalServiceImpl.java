@@ -52,7 +52,6 @@ public class AnimalServiceImpl implements AnimalService {
         return animal;
     }
 
-    
     /** 
      * Esta función obtiene todos los animales de la base de datos
      * @return List<Animal> Una lista con todos los animales de la base de datos
