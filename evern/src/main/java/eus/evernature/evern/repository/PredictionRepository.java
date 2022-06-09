@@ -11,9 +11,9 @@ import eus.evernature.evern.models.Prediction;
 
 public interface PredictionRepository extends JpaRepository<Prediction, Integer> {
 
-    @Query("SELECT p FROM prediction p WHERE p.correctorExpert IS NOT NULL") 
+    @Query("SELECT p FROM prediction p WHERE p.correctorExpert IS NULL") 
     public List<Prediction> findAll();
     
-    @Query("SELECT p FROM prediction p WHERE p.correctorExpert IS NOT NULL") 
+    @Query("SELECT p FROM prediction p WHERE p.correctorExpert IS NULL ORDER BY p.id DESC") 
     public Page<Prediction> findAllSorted(Pageable pageable);
 }

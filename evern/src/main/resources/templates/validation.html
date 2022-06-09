@@ -14,7 +14,7 @@
 
     <header class="action">
         <div class="profile">
-            <img  id="profile" th:src="@{/images/aaaaaaaaa.jpg}" alt="">
+            <img  id="profile" th:src="@{'/img/' + ${prediction.predictedImagePath}}" alt="">
         </div>
         <div class="menu" id="menu">
             <ul class="dropdown">
