@@ -36,8 +36,6 @@ public class ValidationController {
 
     @Autowired
     ValidationService validationService;
-
-    
     
     /** 
      * Esta función se encarga de mostrar una de las predicciones realizadas por la IA
